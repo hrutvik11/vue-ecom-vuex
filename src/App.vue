@@ -1,16 +1,18 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import LayoutComp from "./components/layout/LayoutComp.vue";
+import { isUserLoggedIn, getUserID } from "./utils/helpers";
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink class="" to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <LayoutComp />
 </template>
+<script>
+export default {
+  mounted() {
+    if (isUserLoggedIn()) {
+      const uid = getUserID();
+      this.$store.dispatch("fetchUserDetails", uid);
+    }
+  },
+};
+</script>
