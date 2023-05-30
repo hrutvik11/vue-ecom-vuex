@@ -1,11 +1,14 @@
 <template>
+  <div v-if="getTopProducts().length === 0">No Products Available</div>
   <CardComp
+    v-else
     v-for="product in getTopProducts()"
     :key="product.id"
     @click="onProductClick(product.id)"
   >
     <div
       class="bg-red-500 w-full h-8 text-white text-center flex items-center justify-center"
+      v-if="getISSaleLive"
     >
       SALE IS LIVE - {{ product.saleDiscount }}% off
     </div>
@@ -22,7 +25,7 @@
         >
           ${{ product.price }}
         </div>
-        <div class="text-[18px] font-semibold">
+        <div class="text-[18px] font-semibold" v-if="getISSaleLive">
           ${{ calculateProductSaleCost(product.price, product.saleDiscount) }}
         </div>
       </div>
@@ -37,17 +40,22 @@ export default {
   methods: {
     getTopProducts() {
       const top = this.$store.getters.getTopProductsCount();
-      const subCategories = this.$store?.getters?.getSubCategories;
 
-      const data = [...subCategories]
-        .map((ele) => ele.products)
-        .flat()
-        .filter((el) => top[el.id] !== undefined)
-        .map((ele) => {
-          return { ...ele, topCount: top[ele.id] };
-        })
-        .sort((a, b) => b.topCount - a.topCount);
-      return data;
+      if (Object.keys(top).length > 0) {
+        const subCategories = this.$store?.getters?.getSubCategories;
+
+        const data = [...subCategories]
+          .map((ele) => ele.products)
+          .flat()
+          .filter((el) => top[el.id] !== undefined)
+          .map((ele) => {
+            return { ...ele, topCount: top[ele.id] };
+          })
+          .sort((a, b) => b.topCount - a.topCount);
+        return data;
+      } else {
+        return [];
+      }
     },
     calculateProductSaleCost(price, discount) {
       let costprice = parseFloat(price);

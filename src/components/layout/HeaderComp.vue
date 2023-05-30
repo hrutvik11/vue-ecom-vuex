@@ -108,14 +108,14 @@ export default {
     },
   },
   mounted() {
-    // const interval = setInterval(() => {
-    //   this.time--;
-    // }, 1000);
-    // const time = setTimeout(() => {
-    //   this.$store.commit("SET_SALE", true);
-    //   clearTimeout(time);
-    //   clearInterval(interval);
-    // }, this.time * 1000);
+    const interval = setInterval(() => {
+      this.time--;
+    }, 1000);
+    const time = setTimeout(() => {
+      this.$store.commit("SET_SALE", true);
+      clearTimeout(time);
+      clearInterval(interval);
+    }, this.time * 1000);
   },
 };
 </script>
