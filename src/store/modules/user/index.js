@@ -2,8 +2,6 @@ import { db } from "../../../firebase";
 import { ref, onValue } from "@firebase/database";
 
 export const user = {
-  // namespaced: true,
-
   state() {
     return {
       userData: null,
@@ -36,19 +34,4 @@ export const user = {
       );
     },
   },
-  //   getters: {
-  //     getUserLogedIn(state) {
-  //       return state.userLogedIn;
-  //     },
-  //   },
-  //   mutations: {
-  //     SET_USER_LOGED_IN(state, isLogedIn) {
-  //       state.userLogedIn = isLogedIn;
-  //     },
-  //   },
-  //   actions: {
-  //     changeUserLogedIn({ commit, getters }) {
-  //       commit("SET_USER_LOGED_IN", !getters.getUserLogedIn);
-  //     },
-  //   },
 };
