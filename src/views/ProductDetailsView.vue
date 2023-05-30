@@ -48,6 +48,11 @@ export default {
 
       if (data) {
         this.productData = data;
+        let finalcount = this.$store.getters.getTopProductsCount(data.id);
+        this.$store.dispatch("addTopProducts", {
+          pid: data.id,
+          count: finalcount ? finalcount + 1 : 1,
+        });
       }
     },
   },

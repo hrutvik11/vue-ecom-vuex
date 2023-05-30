@@ -16,10 +16,21 @@
         src="https://eptummers.nl/media/tailoredslider_media/1/Homebanner_1.png"
       />
     </div>
+    <div class="h-[50vh] overflow-y-auto w-full px-4">
+      <p class="text-left text-[32px] font-semibold mt-5">
+        Toppers of the week
+      </p>
+
+      <div class="flex overflow-y-auto w-full gap-4 flex-row mt-5">
+        <TopProductCardComp />
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import { RouterLink } from "vue-router";
+import TopProductCardComp from "../components/TopProductCardComp.vue";
+
 export default {
   data() {
     return {};
@@ -29,6 +40,7 @@ export default {
       return this.$store?.getters?.getCategories;
     },
   },
+  components: { TopProductCardComp },
 };
 </script>
 <style></style>

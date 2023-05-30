@@ -53,6 +53,8 @@ export const products = {
                 Ambilight: "No",
                 "3D": "No",
               },
+              stock: 15,
+              saleDiscount: 10,
             },
           ],
         },
@@ -68,6 +70,8 @@ export const products = {
               desc: "Operating system: Android | Streaming services: Netflix, Spotify, Videoland, Youtube | Control via app: Yes",
               price: "849",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/s/a/samsung-q-series-soundbar-hw-q800c-2023.jpg",
+              stock: 5,
+              saleDiscount: 13,
             },
             {
               id: 3,
@@ -75,7 +79,9 @@ export const products = {
               desc: "Bluetooth: Yes | Wi-Fi: Yes | HDMI connection: Yes",
               isTrending: true,
               price: "239",
+              stock: 5,
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/1/4/1491000_1_1.jpg",
+              saleDiscount: 5,
             },
           ],
         },
@@ -90,7 +96,9 @@ export const products = {
               name: "Denon Home 150 Black",
               desc: "Water Resistant: Yes | Bluetooth: Yes | Wi-Fi: Yes | Smartphone App: Yes",
               price: "199",
+              stock: 7,
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/d/e/denon-home-150-multi-room-speaker.jpg",
+              saleDiscount: 9,
             },
           ],
         },
@@ -107,6 +115,8 @@ export const products = {
               desc: "Screen diagonal: 15.6 inches | Processor: AMD Ryzen 3 | Working memory: 8 GB | Battery life: up to 9 hours",
               price: "498",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/l/e/lenovo-ideapad-3-15alc6-82ku01vumh.jpg",
+              stock: 9,
+              saleDiscount: 20,
             },
           ],
         },
@@ -123,6 +133,8 @@ export const products = {
               desc: "Screen diagonal: 10.5 inches | Total storage capacity: 32 GB | Wireless connection: Bluetooth, Wi-Fi",
               price: "219",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/2/0/2004840844.png",
+              stock: 2,
+              saleDiscount: 30,
             },
           ],
         },
@@ -138,6 +150,8 @@ export const products = {
               desc: "Screen diagonal: 10.5 inches | Total storage capacity: 32 GB | Wireless connection: Bluetooth, Wi-Fi",
               price: "2119",
               img: "https://eptummers.nl/media/wysiwyg/category/computers-tablets/desktop.jpg",
+              stock: 4,
+              saleDiscount: 50,
             },
           ],
         },
@@ -154,6 +168,8 @@ export const products = {
               desc: "Vulgewicht: 9 kg | Toerental: 1600 tpm | Energieklasse: A",
               price: "899",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/p/i/pi_637371033895167620_zoom_1__1.jpg",
+              stock: 5,
+              saleDiscount: 60,
             },
           ],
         },
@@ -169,6 +185,8 @@ export const products = {
               desc: "Type: Exhaust Dryer | Energy class: C | Maximum dry weight: 8 kg",
               price: "360",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/7/1/7185901330_lo1_20190917_201731_3.png",
+              stock: 33,
+              saleDiscount: 10,
             },
           ],
         },
@@ -185,6 +203,8 @@ export const products = {
               desc: "Niche height: 85 - 91 cm | Niche depth: 57 cm | Number of place settings: 14 | Energy class: E",
               price: "998",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/1/4/1472051_1.jpg",
+              stock: 22,
+              saleDiscount: 20,
             },
           ],
         },
@@ -201,6 +221,8 @@ export const products = {
               desc: "Inhoud waterreservoir: 1,7 liter | Heetwaterfunctie: Ja | Geschikt voor melkspecialiteiten: Ja",
               price: "938",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/5/8/588579-n1.jpg",
+              stock: 13,
+              saleDiscount: 15,
             },
           ],
         },
@@ -217,6 +239,8 @@ export const products = {
               desc: "Beard growth: Light beard growth | Precision Trimmer: Yes | Battery life: 45 minutes",
               price: "54",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/s/1/s1333_41_rtp_global_001_3_1.jpg",
+              stock: 11,
+              saleDiscount: 33,
             },
           ],
         },
@@ -232,10 +256,14 @@ export const products = {
               desc: "Charging time: 16 hours | Battery life: 56 min",
               price: "24",
               img: "https://eptummers.nl/media/catalog/product/cache/7732820e3ffd8f70404990cac52a8505/1/6/1651434.webp",
+              stock: 10,
+              saleDiscount: 66,
             },
           ],
         },
       ],
+      isSaleLive: false,
+      topProducts: {},
     };
   },
 
@@ -254,26 +282,33 @@ export const products = {
       );
       return filterData;
     },
-  },
-  // mutations: {
-  //   SET_USER_DATA(state, user_data) {
-  //     state.userData = user_data;
-  //   },
-  // },
-  // actions: {
-  //   async fetchUserDetails({ commit }, uid) {
-  //     const userRef = ref(db, "chatApp/users/" + uid);
 
-  //     onValue(
-  //       userRef,
-  //       async (snap) => {
-  //         if (snap.exists()) {
-  //           const val = await snap.val();
-  //           commit("SET_USER_DATA", val);
-  //         }
-  //       },
-  //       { onlyOnce: true }
-  //     );
-  //   },
-  // },
+    getIsSaleLive(state) {
+      return state.isSaleLive;
+    },
+
+    getTopProductsCount: (state) => (pid) => {
+      if (pid) {
+        return state.topProducts[pid];
+      } else {
+        return state.topProducts;
+      }
+    },
+  },
+  mutations: {
+    SET_TOP_PRODUCTS(state, { pid, count }) {
+      state.topProducts = { ...state.topProducts, [pid]: count };
+    },
+    SET_SUB_CATEGORIES(state, data) {
+      state.subCategories = data;
+    },
+    SET_SALE(state, bool) {
+      state.isSaleLive = bool;
+    },
+  },
+  actions: {
+    addTopProducts({ commit, getters }, { pid, count }) {
+      commit("SET_TOP_PRODUCTS", { pid, count });
+    },
+  },
 };

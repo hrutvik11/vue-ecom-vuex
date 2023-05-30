@@ -24,10 +24,12 @@
         height="35"
         class="cursor-pointer"
         @click="toggleCart"
+        id="menu-button"
       />
+
       <div>
         <div
-          v-if="isUserLogged"
+          v-if="isUserLogged()"
           class="flex items-center flex-row gap-4 min-w-[150px]"
         >
           <div>
@@ -49,24 +51,40 @@
         </div>
       </div>
     </div>
+    <div v-if="getISSaleLive" class="bg-red-500 px-4 py-2 animate-pulse">
+      SALE IS LIVE
+    </div>
+    <div v-if="!getISSaleLive" class="px-4 py-2">
+      sale will be live in {{ time }}s
+    </div>
+    <button v-if="isUserLogged()" class="ml-10" @click="onLogOutClick">
+      Logout
+    </button>
+    <UserCartComp :iscartOpen="iscartOpen" />
   </header>
 </template>
 <script>
 // import CartDrawerComp from "./CartDrawerComp.vue";
 import { RouterLink } from "vue-router";
-import { isUserLoggedIn } from "../../utils/helpers";
+import { isUserLoggedIn, onLogOut } from "../../utils/helpers";
+import UserCartComp from "../UserCartComp.vue";
 
 export default {
-  //   components: {
-  //     CartDrawerComp,
-  //   },
+  components: {
+    UserCartComp,
+  },
   data() {
     return {
       iscartOpen: false,
       userData: null,
+      time: 20,
     };
   },
   methods: {
+    onLogOutClick() {
+      onLogOut();
+      this.$store.commit("SET_USER_DATA", null);
+    },
     toggleCart() {
       this.iscartOpen = !this.iscartOpen;
     },
@@ -80,11 +98,24 @@ export default {
         return "";
       }
     },
-  },
-  computed: {
     isUserLogged() {
       return isUserLoggedIn();
     },
+  },
+  computed: {
+    getISSaleLive() {
+      return this.$store.getters.getIsSaleLive;
+    },
+  },
+  mounted() {
+    // const interval = setInterval(() => {
+    //   this.time--;
+    // }, 1000);
+    // const time = setTimeout(() => {
+    //   this.$store.commit("SET_SALE", true);
+    //   clearTimeout(time);
+    //   clearInterval(interval);
+    // }, this.time * 1000);
   },
 };
 </script>

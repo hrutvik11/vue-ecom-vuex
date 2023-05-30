@@ -55,6 +55,8 @@ export default {
 
               if (keyArr[0].password === this.password) {
                 setUserLoggedIn(true, keyArr[0].id);
+                this.$store.dispatch("fetchUserDetails", keyArr[0].id);
+                this.setUserCart(keyArr[0].id);
                 this.$router.push("/");
               } else {
                 alert("wrong creds");
@@ -65,6 +67,16 @@ export default {
           },
           { onlyOnce: true }
         );
+      }
+    },
+    setUserCart(userid) {
+      const data = this.$store.getters.getUserCart("demouser");
+
+      if (data) {
+        this.$store.commit("SET_USER_CART", {
+          user_cart: { ...data },
+          uid: userid,
+        });
       }
     },
   },

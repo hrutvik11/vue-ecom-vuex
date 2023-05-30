@@ -4,7 +4,11 @@ export const setUserLoggedIn = (bool, id) => {
 };
 
 export const getUserID = () => {
-  return localStorage.getItem("userID");
+  if (localStorage.getItem("userID") !== "demouser") {
+    return localStorage.getItem("userID");
+  } else {
+    return "demouser";
+  }
 };
 
 export const isUserLoggedIn = () => {
@@ -16,4 +20,9 @@ export const isUserLoggedIn = () => {
   } else {
     return false;
   }
+};
+
+export const onLogOut = () => {
+  localStorage.setItem("vueIsLoggedIn", false);
+  localStorage.setItem("userID", "");
 };
