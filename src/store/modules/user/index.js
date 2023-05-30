@@ -1,5 +1,5 @@
 import { db } from "../../../firebase";
-import { ref, query, onValue, child } from "@firebase/database";
+import { ref, onValue } from "@firebase/database";
 
 export const user = {
   // namespaced: true,

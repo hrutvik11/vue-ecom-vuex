@@ -20,6 +20,30 @@ const router = createRouter({
         hidelayout: true,
       },
     },
+    {
+      path: "/category/:id",
+      name: "category",
+      component: () => import("../views/CategoryView.vue"),
+      meta: {
+        hidelayout: false,
+      },
+    },
+    {
+      path: "/products/:pid",
+      name: "products",
+      component: () => import("../views/ProductsListView.vue"),
+      meta: {
+        hidelayout: false,
+      },
+    },
+    {
+      path: "/productdetail/:pid",
+      name: "productsdetail",
+      component: () => import("../views/ProductDetailsView.vue"),
+      meta: {
+        hidelayout: false,
+      },
+    },
   ],
 });
 

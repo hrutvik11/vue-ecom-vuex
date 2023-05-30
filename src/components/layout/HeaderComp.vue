@@ -5,12 +5,14 @@
     class="bg-[#515150] text-white h-[80px] flex items-center justify-center"
   >
     <div class="flex items-center justify-evenly w-[50%]">
-      <img
-        src="https://eptummers.nl/7e8e89a030b10f539cffe444ef646945.svg"
-        alt="Logo"
-        width="210"
-        height="28"
-      />
+      <RouterLink to="/">
+        <img
+          src="https://eptummers.nl/7e8e89a030b10f539cffe444ef646945.svg"
+          alt="Logo"
+          width="210"
+          height="28"
+        />
+      </RouterLink>
       <input class="w-[500px]" placeholder="search" />
     </div>
     <div class="flex justify-between items-center gap-6">
@@ -26,7 +28,7 @@
       <div>
         <div
           v-if="isUserLogged"
-          class="flex items-center justify-between flex-row gap-4"
+          class="flex items-center flex-row gap-4 min-w-[150px]"
         >
           <div>
             <img
