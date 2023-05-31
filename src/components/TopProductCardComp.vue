@@ -34,15 +34,16 @@
 </template>
 <script>
 import CardComp from "../components/CardComp.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: { CardComp },
   methods: {
     getTopProducts() {
-      const top = this.$store.getters.getTopProductsCount();
+      const top = this.getTopProductsCount();
 
       if (Object.keys(top).length > 0) {
-        const subCategories = this.$store?.getters?.getSubCategories;
+        const subCategories = this.getSubCategories;
 
         const data = [...subCategories]
           .map((ele) => ele.products)
@@ -70,9 +71,11 @@ export default {
     this.getTopProducts();
   },
   computed: {
-    getISSaleLive() {
-      return this.$store.getters.getIsSaleLive;
-    },
+    ...mapGetters({
+      getISSaleLive: "getIsSaleLive",
+      getTopProductsCount: "getTopProductsCount",
+      getSubCategories: "getSubCategories",
+    }),
   },
 };
 </script>

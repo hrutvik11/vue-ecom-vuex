@@ -65,6 +65,7 @@
 <script>
 import { getUserID } from "../utils/helpers";
 import DropDownComp from "./DropDownComp.vue";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -89,10 +90,10 @@ export default {
       return parseFloat(data.toFixed(2));
     },
     fetchUserCart() {
-      const usertcart = this.$store.getters.getUserCart(getUserID());
+      const usertcart = this.getUserCart(getUserID());
 
       if (usertcart) {
-        const subCategories = this.$store?.getters?.getSubCategories;
+        const subCategories = this.getSubCategories;
         let total = 0;
         let discountTotal = 0;
 
@@ -122,8 +123,13 @@ export default {
   },
   computed: {
     getISSaleLive() {
-      return this.$store.getters.getIsSaleLive;
+      return this.getIsSaleLive;
     },
+    ...mapGetters({
+      getIsSaleLive: "getIsSaleLive",
+      getUserCart: "getUserCart",
+      getSubCategories: "getSubCategories",
+    }),
   },
 };
 </script>

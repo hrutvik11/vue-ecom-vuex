@@ -68,6 +68,7 @@
 import { RouterLink } from "vue-router";
 import { isUserLoggedIn, onLogOut } from "../../utils/helpers";
 import UserCartComp from "../UserCartComp.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -92,8 +93,8 @@ export default {
       this.iscartOpen = false;
     },
     getUserLoggedInDetails(key) {
-      if (this.$store?.getters?.getUserData) {
-        return this.$store?.getters?.getUserData[key];
+      if (this.getUserData) {
+        return this.getUserData[key];
       } else {
         return "";
       }
@@ -104,8 +105,12 @@ export default {
   },
   computed: {
     getISSaleLive() {
-      return this.$store.getters.getIsSaleLive;
+      return this.getIsSaleLive;
     },
+    ...mapGetters({
+      getIsSaleLive: "getIsSaleLive",
+      getUserData: "getUserData",
+    }),
   },
   mounted() {
     const interval = setInterval(() => {

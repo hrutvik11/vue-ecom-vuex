@@ -26,6 +26,7 @@
 import { isUserLoggedIn, setUserLoggedIn } from "../utils/helpers";
 import { db } from "../firebase";
 import { ref, query, orderByChild, equalTo, onValue } from "@firebase/database";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -70,7 +71,7 @@ export default {
       }
     },
     setUserCart(userid) {
-      const data = this.$store.getters.getUserCart("demouser");
+      const data = this.getUserCart("demouser");
 
       if (data) {
         this.$store.commit("SET_USER_CART", {
@@ -79,6 +80,11 @@ export default {
         });
       }
     },
+  },
+  computed: {
+    ...mapGetters({
+      getUserCart: "getUserCart",
+    }),
   },
   beforeRouteEnter(to, from, next) {
     if (isUserLoggedIn()) {

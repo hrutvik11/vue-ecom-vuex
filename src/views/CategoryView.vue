@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import CardComp from "../components/CardComp.vue";
 
 export default {
@@ -40,15 +41,20 @@ export default {
   computed: {
     fetchSubCategories() {
       if (this.getCategoryID === "all") {
-        return this.$store?.getters?.getSubCategories;
+        return this.getSubCategories;
       } else {
-        return this.$store.getters.getSubCategory(this.getCategoryID);
+        return this.getSubCategory(this.getCategoryID);
       }
     },
 
     getCategoryID() {
       return this.$route.params.id;
     },
+
+    ...mapGetters({
+      getSubCategories: "getSubCategories",
+      getSubCategory: "getSubCategory",
+    }),
   },
 };
 </script>

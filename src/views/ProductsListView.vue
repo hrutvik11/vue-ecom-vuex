@@ -60,6 +60,7 @@
 <script>
 import CardComp from "../components/CardComp.vue";
 import { getUserID } from "../utils/helpers";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -76,7 +77,7 @@ export default {
       this.$store.dispatch("addToUserCart", { pid, uid: getUserID() });
     },
     isAddedInCart(pid) {
-      const usertcart = this.$store.getters.getUserCart(getUserID());
+      const usertcart = this.getUserCart(getUserID());
 
       if (usertcart) {
         if (usertcart[pid]) {
@@ -89,7 +90,7 @@ export default {
       }
     },
     fetchProductCountInCart(pid) {
-      return this.$store?.getters?.getCartProductCount(getUserID(), pid);
+      return this.getCartProductCount(getUserID(), pid);
     },
     calculateProductSaleCost(price, discount) {
       let costprice = parseFloat(price);
@@ -99,7 +100,7 @@ export default {
   },
   computed: {
     fetchProducts() {
-      const subCategories = this.$store?.getters?.getSubCategories;
+      const subCategories = this.getSubCategories;
 
       const productsData = [...subCategories].find(
         (el) =>
@@ -112,8 +113,14 @@ export default {
       }
     },
     getISSaleLive() {
-      return this.$store.getters.getIsSaleLive;
+      return this.getIsSaleLive;
     },
+    ...mapGetters({
+      getUserCart: "getUserCart",
+      getCartProductCount: "getCartProductCount",
+      getSubCategories: "getSubCategories",
+      getIsSaleLive: "getIsSaleLive",
+    }),
   },
 };
 </script>

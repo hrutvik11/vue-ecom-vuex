@@ -30,13 +30,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return { productData: null };
   },
   computed: {
     fetchProductData() {
-      const subCategories = this.$store?.getters?.getSubCategories;
+      const subCategories = this.getSubCategories;
 
       const data = [...subCategories]
         .map((ele) => ele.products)
@@ -48,13 +50,17 @@ export default {
 
       if (data) {
         this.productData = data;
-        let finalcount = this.$store.getters.getTopProductsCount(data.id);
+        let finalcount = this.getTopProductsCount(data.id);
         this.$store.dispatch("addTopProducts", {
           pid: data.id,
           count: finalcount ? finalcount + 1 : 1,
         });
       }
     },
+    ...mapGetters({
+      getSubCategories: "getSubCategories",
+      getTopProductsCount: "getTopProductsCount",
+    }),
   },
   created() {
     this.fetchProductData;

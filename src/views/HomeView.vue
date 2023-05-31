@@ -30,6 +30,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import TopProductCardComp from "../components/TopProductCardComp.vue";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -37,8 +38,9 @@ export default {
   },
   computed: {
     fetchCategories() {
-      return this.$store?.getters?.getCategories;
+      return this.getCategories;
     },
+    ...mapGetters({ getCategories: "getCategories" }),
   },
   components: { TopProductCardComp },
 };
